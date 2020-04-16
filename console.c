@@ -82,6 +82,11 @@ static void pop_file();
 
 static bool interpret_cmda(int argc, char *argv[]);
 
+bool do_hello(int argc, char *argv[])
+{
+    return (bool) printf("Hello, world\n");
+}
+
 /* Initialize interpreter */
 void init_cmd()
 {
@@ -89,7 +94,6 @@ void init_cmd()
     param_list = NULL;
     err_cnt = 0;
     quit_flag = false;
-
     add_cmd("help", do_help_cmd, "                | Show documentation");
     add_cmd("option", do_option_cmd,
             " [name val]     | Display or set options");
@@ -99,6 +103,7 @@ void init_cmd()
     add_cmd("log", do_log_cmd, " file           | Copy output to file");
     add_cmd("time", do_time_cmd, " cmd arg ...    | Time command execution");
     add_cmd("#", do_comment_cmd, " ...            | Display comment");
+    add_cmd("hello", do_hello, "		   	  |Print hello message");
     add_param("simulation", (int *) &simulation, "Start/Stop simulation mode",
               NULL);
     add_param("verbose", &verblevel, "Verbosity level", NULL);
